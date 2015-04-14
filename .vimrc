@@ -1,26 +1,90 @@
-" Syntax highlighting
+" Store as ~/.vimrc (Unix) or ~/_vimrc (Windows)
+
 syntax on
 
-" Use spaces instead of tabs
+" Indentation
+set autoindent
+filetype plugin indent on
+
+" Use OS clipboard for copypasta
+set clipboard=unnamed
+
+" Enable OS mouse clicking and scrolling
+"
+" Note for Mac OS X: Requires SIMBL and MouseTerm
+"
+" http://www.culater.net/software/SIMBL/SIMBL.php
+" https://bitheap.org/mouseterm/
+if has("mouse")
+   set mouse=a
+endif
+
+" Bash-style tab completion
+set wildmode=longest,list
+set wildmenu
+
+" No swap files, use version control instead
+set noswapfile
+
+" Fix bad autoindent of pasted text
+set paste
+
+" Show line numbers
+set number
+
+" Default to soft tabs, 2 spaces
 set expandtab
+set sw=2
+set sts=2
+" Except for Makefiles; hard tabs of width 2
+autocmd FileType make set ts=2
+" And Markdown
+autocmd FileType mkd set sw=4
+autocmd FileType mkd set sts=4
 
-" Be smart when using tabs ;)
-set smarttab
+" Default to Unix LF line endings
+set ffs=unix
 
-" 1 tab == 4 spaces
-set shiftwidth=4
-set tabstop=4
+" Folding
+set foldmethod=syntax
+set foldcolumn=1
+set foldlevelstart=20
 
-set ai "Auto indent
-set si "Smart indent
+let g:vim_markdown_folding_disabled=1 " Markdown
+let javaScript_fold=1                 " JavaScript
+let perl_fold=1                       " Perl
+let php_folding=1                     " PHP
+let r_syntax_folding=1                " R
+let ruby_fold=1                       " Ruby
+let sh_fold_enabled=1                 " sh
+let vimsyn_folding='af'               " Vim script
+let xml_syntax_folding=1              " XML
 
-" Treat long lines as break lines (useful when moving around in them)
-map j gj
-map k gk
+"
+" Vundle
+" https://github.com/gmarik/vundle
+"
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-"This is for setting Makefiles with tabs not spaces
-autocmd FileType make setlocal noexpandtab
+Plugin 'gmarik/Vundle.vim'
 
-" Format the status line
-set ruler
-set statusline=%t[%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%m%r%y%=%c,%l/%L\ %P
+Plugin 'gmarik/vundle'
+Plugin 'kien/ctrlp.vim'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'fsouza/go.vim'
+Plugin 'wting/rust.vim'
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'mtth/scratch.vim'
+Plugin 'greplace.vim'
+Plugin 'editorconfig/editorconfig-vim'
+Plugin 'ryanss/vim-hackernews'
+
+call vundle#end()
+
+
+" Scratch splits the current window in half
+let g:scratch_height = 0.50
+" Scratch opens in Markdown format
+let g:scratch_filetype = 'markdown'
