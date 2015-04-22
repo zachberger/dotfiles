@@ -1,3 +1,6 @@
+set -euo pipefail
+IFS=$'\n\t'
+
 git submodule init
 git submodule update
 
