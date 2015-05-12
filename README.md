@@ -5,3 +5,6 @@ Configurations for:
 * vim
 * git
 * zsh
+
+### Also See
+* masterkoppa's [configs](https://github.com/masterkoppa/config)
